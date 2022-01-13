@@ -1,6 +1,23 @@
 on: [push]
 
 jobs:
+  use-oxide:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - {tool: "a"}
+          - {tool: "b"}
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - run: |
+          which pip3
+          which python3
+          which pip
+          echo ${{matrix.tool}}
+
   hello_world_job:
     runs-on: ubuntu-latest
     name: A job to say hello
